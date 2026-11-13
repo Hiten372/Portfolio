@@ -529,57 +529,84 @@
         potential project, please feel free to reach out to me. I'm always open
         to new opportunities and collaborations.
       </p>
-      <form
-        method="POST"
-        action="https://api.web3forms.com/submit"
-        class="max-w-2xl mx-auto"
-      >
-        <input
-          type="hidden"
-          name="access_key"
-          value="1a5bdf69-a308-4c48-98bb-777d823cd0db"
-        />
-        <div class="grid grid-cols-auto gap-6 mt-10 mb-8">
-          <input
-            type="text"
-            placeholder="Enter your name"
-            class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white dark:bg-[#7e7d7c]/50 dark:border-white/90 dark:text-[#fff8db]"
-            required
-            name="name"
-          />
-          <input
-            type="email"
-            placeholder="Enter your email"
-            class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white dark:bg-[#7e7d7c]/50 dark:border-white/90 dark:text-[#fff8db]"
-            required
-            name="email"
-          />
-        </div>
-        <textarea
-          name="message"
-          id="message"
-          rows="6"
-          placeholder="Enter your message"
-          class="w-full p-4 outline-none border-[0.5px] border-gray-400 rounded-md bg-white mb-6 dark:bg-[#7e7d7c]/50 dark:border-white/90 dark:text-[#fff8db]"
-          required
-        ></textarea>
-        <button
-          type="submit"
-          class="w-max flex items-center justify-center gap-2 text-gray-700 rounded-full py-2 px-10 mx-auto my-2 hover:bg-[#fff8db] hover:shadow-[3px_1px_3px_1px_#000] hover:-translate-y-1 duration-500 dark:text-[#fff8db] dark:hover:bg-[#7e7d7c] dark:hover:shadow-white"
-        >
-          Send
-          <img
-            src="./images/right-arrow-bold.png"
-            alt="arrow"
-            class="w-4 dark:hidden"
-          />
-          <img
-            src="./images/right-arrow-bold-dark.png"
-            alt="arrow"
-            class="w-4 hidden dark:block"
-          />
-        </button>
-      </form>
+     <form class="max-w-2xl mx-auto" method="POST" action=https://api.web3forms.com/submit">
+  <!-- Your existing Web3Forms access key -->
+  <input
+    type="hidden"
+    name="access_key"
+    value="1a5bdf69-a308-4c48-98bb-777d823cd0db"
+  />
+
+  <input
+    type="hidden"
+    name="subject"
+    value="New Portfolio Contact - Hiten Prasad"
+  />
+
+  <!-- Spam protection -->
+  <input
+    type="checkbox"
+    name="botcheck"
+    class="hidden"
+    style="display:none"
+    tabindex="-1"
+    autocomplete="off"
+  />
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10 mb-8">
+    <input
+      type="text"
+      name="name"
+      placeholder="Enter your name"
+      required
+      class="w-full p-3 outline-none border border-gray-400 rounded-md bg-white dark:bg-[#7e7d7c]/50 dark:text-white"
+    />
+
+    <input
+      type="email"
+      name="email"
+      placeholder="Enter your email"
+      required
+      class="w-full p-3 outline-none border border-gray-400 rounded-md bg-white dark:bg-[#7e7d7c]/50 dark:text-white"
+    />
+  </div>
+
+  <textarea
+    name="message"
+    rows="6"
+    placeholder="Enter your message"
+    required
+    class="w-full p-4 outline-none border border-gray-400 rounded-md bg-white mb-6 dark:bg-[#7e7d7c]/50 dark:text-white"
+  ></textarea>
+
+  <!-- Submission status -->
+  <p
+    id="formResult"
+    class="text-center text-sm mb-4"
+    role="status"
+    aria-live="polite"
+  ></p>
+
+  <button
+    type="submit"
+    id="contactSubmit"
+    class="w-max flex items-center justify-center gap-2 text-gray-700 rounded-full py-3 px-10 mx-auto my-2 border border-gray-400 hover:bg-[#fff8db] hover:-translate-y-1 duration-300 dark:text-white dark:border-white"
+  >
+    <span id="buttonText">Send Message</span>
+
+    <img
+      src="./images/right-arrow-bold.png"
+      alt=""
+      class="w-4 dark:hidden"
+    />
+
+    <img
+      src="./images/right-arrow-bold-dark.png"
+      alt=""
+      class="w-4 hidden dark:block"
+    />
+  </button>
+</form>
     </div>
 
     <!-- ------------ footer -------------- -->
