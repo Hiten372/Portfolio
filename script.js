@@ -62,3 +62,43 @@ function toggleTheme() {
     localStorage.theme = "light";
   }
 }
+const form = document.getElementById('form');
+const result = document.getElementById('formResult');
+
+if (form) {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+    
+    result.style.display = "block";
+    result.textContent = "Please wait...";
+    result.className = "text-center text-sm mb-4 text-gray-500";
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: json
+    })
+    .then(async (response) => {
+      let jsonResponse = await response.json();
+      if (response.status == 200) {
+        result.textContent = jsonResponse.message;
+        result.className = "text-center text-sm mb-4 text-emerald-600 dark:text-emerald-400";
+        form.reset();
+      } else {
+        result.textContent = jsonResponse.message;
+        result.className = "text-center text-sm mb-4 text-red-500";
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      result.textContent = "Something went wrong!";
+      result.className = "text-center text-sm mb-4 text-red-500";
+    });
+  });
+}
