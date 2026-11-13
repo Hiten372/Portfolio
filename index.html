@@ -202,60 +202,68 @@
     </section>
 
     <!-- My Work Section -->
+   <!-- My Work Section -->
     <section id="work" class="w-full px-[12%] py-8 scroll-mt-20">
       <h4 class="text-center mb-2 text-lg font-ovo">My portfolio</h4>
       <h2 class="text-5xl text-center font-ovo">My latest work</h2>
       <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12 mt-5 font-ovo dark:text-[#fff8db]">
         Here are some of my recent projects that showcase my skills and expertise.
       </p>
+
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 my-10 gap-5">
-        <div class="group aspect-square bg-[url('./images/work-1.png')] bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer">
-          <div class="bg-white w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-3 px-5 flex items-center justify-between duration-500 group-hover:bottom-7">
+        
+        <!-- Project 1: AI Chat -->
+        <div class="group relative aspect-square cursor-pointer overflow-hidden rounded-xl bg-[url('./images/work-1.png')] bg-cover bg-center bg-no-repeat shadow-md transition-all duration-300">
+          <div class="absolute bottom-4 left-1/2 flex w-10/12 -translate-x-1/2 items-center justify-between rounded-lg bg-white/95 px-5 py-3 shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:bottom-6 dark:bg-zinc-900/95 dark:text-white">
             <div>
-              <h2 class="font-semibold text-gray-900">AI Chat</h2>
-              <p class="text-sm text-gray-700">AI Project</p>
+              <h2 class="font-semibold text-gray-900 dark:text-white">AI Chat</h2>
+              <p class="text-xs text-gray-600 dark:text-gray-400">AI Project</p>
             </div>
-            <a href="https://ai-chat-advanced-llma.vercel.app/" target="_blank" rel="noopener noreferrer" class="border rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition">
-              <img src="./images/send-icon.png" alt="link" class="w-5" />
+            <a href="https://ai-chat-advanced-llma.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="View AI Chat Project" class="flex aspect-square w-9 items-center justify-center rounded-full border border-black bg-white shadow-[2px_2px_0_#000] transition-all duration-200 group-hover:bg-lime-300 dark:border-white dark:bg-zinc-800 dark:text-white">
+              <img src="./images/send-icon.png" alt="link" class="w-4 dark:invert" />
             </a>
           </div>
         </div>
-        <div class="group aspect-square bg-[url('./images/work-2.png')] bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer">
-          <div class="bg-white w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-3 px-5 flex items-center justify-between duration-500 group-hover:bottom-7">
+
+        <!-- Project 2: Movies Finder -->
+        <div class="group relative aspect-square cursor-pointer overflow-hidden rounded-xl bg-[url('./images/work-2.png')] bg-cover bg-center bg-no-repeat shadow-md transition-all duration-300">
+          <div class="absolute bottom-4 left-1/2 flex w-10/12 -translate-x-1/2 items-center justify-between rounded-lg bg-white/95 px-5 py-3 shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:bottom-6 dark:bg-zinc-900/95 dark:text-white">
             <div>
-              <h2 class="font-semibold text-gray-900">Movies Finder</h2>
-            
+              <h2 class="font-semibold text-gray-900 dark:text-white">Movies Finder</h2>
+              <p class="text-xs text-gray-600 dark:text-gray-400">API Based</p>
             </div>
-            <div>
-             <p class="text-sm text-gray-700">API Based</p>
-            </div>
-            <a href="https://movies-finder-bice.vercel.app" target="_blank" rel="noopener noreferrer" class="border rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition">
-              <img src="./images/send-icon.png" alt="link" class="w-5" />
+            <a href="https://movies-finder-bice.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="View Movies Finder Project" class="flex aspect-square w-9 items-center justify-center rounded-full border border-black bg-white shadow-[2px_2px_0_#000] transition-all duration-200 group-hover:bg-lime-300 dark:border-white dark:bg-zinc-800 dark:text-white">
+              <img src="./images/send-icon.png" alt="link" class="w-4 dark:invert" />
             </a>
           </div>
         </div>
-        <div class="group aspect-square bg-[url('./images/work-3.png')] bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer">
-          <div class="bg-white w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-3 px-5 flex items-center justify-between duration-500 group-hover:bottom-7">
+
+        <!-- Project 3: Task Manager -->
+        <div class="group relative aspect-square cursor-pointer overflow-hidden rounded-xl bg-[url('./images/work-3.png')] bg-cover bg-center bg-no-repeat shadow-md transition-all duration-300">
+          <div class="absolute bottom-4 left-1/2 flex w-10/12 -translate-x-1/2 items-center justify-between rounded-lg bg-white/95 px-5 py-3 shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:bottom-6 dark:bg-zinc-900/95 dark:text-white">
             <div>
-              <h2 class="font-semibold text-gray-900">Task Manager</h2>
-              <p class="text-sm text-gray-700">Frontend Project</p>
+              <h2 class="font-semibold text-gray-900 dark:text-white">Task Manager</h2>
+              <p class="text-xs text-gray-600 dark:text-gray-400">Frontend Project</p>
             </div>
-            <a href="https://task-manager-pr0.netlify.app/" target="_blank" rel="noopener noreferrer" class="border rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition">
-              <img src="./images/send-icon.png" alt="link" class="w-5" />
+            <a href="https://task-manager-pr0.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="View Task Manager Project" class="flex aspect-square w-9 items-center justify-center rounded-full border border-black bg-white shadow-[2px_2px_0_#000] transition-all duration-200 group-hover:bg-lime-300 dark:border-white dark:bg-zinc-800 dark:text-white">
+              <img src="./images/send-icon.png" alt="link" class="w-4 dark:invert" />
             </a>
           </div>
         </div>
-        <div class="group aspect-square bg-[url('./images/work-4.png')] bg-no-repeat bg-cover bg-center rounded-lg relative cursor-pointer">
-          <div class="bg-white w-10/12 rounded-md absolute bottom-5 left-1/2 -translate-x-1/2 py-3 px-5 flex items-center justify-between duration-500 group-hover:bottom-7">
+
+        <!-- Project 4: Survey Form -->
+        <div class="group relative aspect-square cursor-pointer overflow-hidden rounded-xl bg-[url('./images/work-4.png')] bg-cover bg-center bg-no-repeat shadow-md transition-all duration-300">
+          <div class="absolute bottom-4 left-1/2 flex w-10/12 -translate-x-1/2 items-center justify-between rounded-lg bg-white/95 px-5 py-3 shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:bottom-6 dark:bg-zinc-900/95 dark:text-white">
             <div>
-              <h2 class="font-semibold text-gray-900">Survey Form</h2>
-              <p class="text-sm text-gray-700">Responsive UI</p>
+              <h2 class="font-semibold text-gray-900 dark:text-white">Survey Form</h2>
+              <p class="text-xs text-gray-600 dark:text-gray-400">Responsive UI</p>
             </div>
-            <a href="https://form-survey-registration.netlify.app/" target="_blank" rel="noopener noreferrer" class="border rounded-full border-black w-9 aspect-square flex items-center justify-center shadow-[2px_2px_0_#000] group-hover:bg-lime-300 transition">
-              <img src="./images/send-icon.png" alt="link" class="w-5" />
+            <a href="https://form-survey-registration.netlify.app/" target="_blank" rel="noopener noreferrer" aria-label="View Survey Form Project" class="flex aspect-square w-9 items-center justify-center rounded-full border border-black bg-white shadow-[2px_2px_0_#000] transition-all duration-200 group-hover:bg-lime-300 dark:border-white dark:bg-zinc-800 dark:text-white">
+              <img src="./images/send-icon.png" alt="link" class="w-4 dark:invert" />
             </a>
           </div>
         </div>
+
       </div>
     </section>
 
