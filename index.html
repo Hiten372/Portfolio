@@ -170,37 +170,46 @@
       </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="w-full px-[12%] py-8 scroll-mt-20">
-      <h4 class="text-center mb-2 text-lg font-ovo">What I offer</h4>
-      <h2 class="text-5xl text-center font-ovo">My services</h2>
-      <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12 mt-5 font-ovo dark:text-[#fff8db]">
-        I provide a range of services to help you build and grow your online presence.
-      </p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-        <div class="border border-gray-400 rounded-lg px-8 py-10 hover:shadow-[4px_4px_0_#000] hover:bg-[#fff8db] hover:-translate-y-1 duration-500 cursor-pointer dark:border-white dark:hover:shadow-white dark:hover:bg-[#7e7d7c] dark:text-[#fff8db]">
-          <img src="./images/mobile-icon.png" alt="Web Apps" class="w-10" />
-          <h3 class="text-lg text-gray-700 my-4 dark:text-[#fff8db]">Full Stack Web Apps</h3>
-          <p class="text-gray-600 text-sm dark:text-[#fff8db]">Creating complete MERN stack applications with authentication and databases.</p>
-        </div>
-        <div class="border border-gray-400 rounded-lg px-8 py-10 hover:shadow-[4px_4px_0_#000] hover:bg-[#fff8db] hover:-translate-y-1 duration-500 cursor-pointer dark:border-white dark:hover:shadow-white dark:hover:bg-[#7e7d7c] dark:text-[#fff8db]">
-          <img src="./images/ui-icon.png" alt="UI Design" class="w-10" />
-          <h3 class="text-lg text-gray-700 my-4 dark:text-[#fff8db]">Responsive Design</h3>
-          <p class="text-gray-600 text-sm dark:text-[#fff8db]">Designing websites that work smoothly across desktop, tablet, and mobile.</p>
-        </div>
-        <div class="border border-gray-400 rounded-lg px-8 py-10 hover:shadow-[4px_4px_0_#000] hover:bg-[#fff8db] hover:-translate-y-1 duration-500 cursor-pointer dark:border-white dark:hover:shadow-white dark:hover:bg-[#7e7d7c] dark:text-[#fff8db]">
-          <img src="./images/graphics-icon.png" alt="API" class="w-10" />
-          <h3 class="text-lg text-gray-700 my-4 dark:text-[#fff8db]">API Integration</h3>
-          <p class="text-gray-600 text-sm dark:text-[#fff8db]">Integrating third-party APIs and services to add real-time features.</p>
-        </div>
-        <div class="border border-gray-400 rounded-lg px-8 py-10 hover:shadow-[4px_4px_0_#000] hover:bg-[#fff8db] hover:-translate-y-1 duration-500 cursor-pointer dark:border-white dark:hover:shadow-white dark:hover:bg-[#7e7d7c] dark:text-[#fff8db]">
-          <img src="./images/web-icon.png" alt="Deployment" class="w-10" />
-          <h3 class="text-lg text-gray-700 my-4 dark:text-[#fff8db]">Website Deployment</h3>
-          <p class="text-gray-600 text-sm dark:text-[#fff8db]">Deploying and managing applications on platforms like Vercel and Netlify.</p>
-        </div>
-      </div>
-    </section>
+   <section id="services" class="w-full px-[12%] py-8 scroll-mt-20">
+  <h4 class="text-center mb-2 text-lg font-ovo">What I offer</h4>
+  <h2 class="text-5xl text-center font-ovo">My services</h2>
+  <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12 mt-5 font-ovo dark:text-[#fff8db]">
+    I provide a range of services to help you build and grow your online presence.
+  </p>
 
+  <!-- Changed grid-cols to show all 4 cards in one row on lg screens -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 my-8">
+    
+    <!-- Card 1 -->
+    <div class="border border-gray-400 rounded-lg p-6 hover:shadow-[4px_4px_0_#000] hover:bg-[#fff8db] hover:-translate-y-1 duration-500 cursor-pointer dark:border-white dark:hover:shadow-white dark:hover:bg-[#7e7d7c] dark:text-[#fff8db]">
+      <img src="./images/mobile-icon.png" alt="Web Apps" class="w-9" />
+      <h3 class="text-base font-semibold text-gray-700 my-3 dark:text-[#fff8db]">Full Stack Web Apps</h3>
+      <p class="text-gray-600 text-xs dark:text-[#fff8db]">Creating complete MERN stack applications with authentication and databases.</p>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="border border-gray-400 rounded-lg p-6 hover:shadow-[4px_4px_0_#000] hover:bg-[#fff8db] hover:-translate-y-1 duration-500 cursor-pointer dark:border-white dark:hover:shadow-white dark:hover:bg-[#7e7d7c] dark:text-[#fff8db]">
+      <img src="./images/ui-icon.png" alt="UI Design" class="w-9" />
+      <h3 class="text-base font-semibold text-gray-700 my-3 dark:text-[#fff8db]">Responsive Design</h3>
+      <p class="text-gray-600 text-xs dark:text-[#fff8db]">Designing websites that work smoothly across desktop, tablet, and mobile.</p>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="border border-gray-400 rounded-lg p-6 hover:shadow-[4px_4px_0_#000] hover:bg-[#fff8db] hover:-translate-y-1 duration-500 cursor-pointer dark:border-white dark:hover:shadow-white dark:hover:bg-[#7e7d7c] dark:text-[#fff8db]">
+      <img src="./images/graphics-icon.png" alt="API" class="w-9" />
+      <h3 class="text-base font-semibold text-gray-700 my-3 dark:text-[#fff8db]">API Integration</h3>
+      <p class="text-gray-600 text-xs dark:text-[#fff8db]">Integrating third-party APIs and services to add real-time features.</p>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="border border-gray-400 rounded-lg p-6 hover:shadow-[4px_4px_0_#000] hover:bg-[#fff8db] hover:-translate-y-1 duration-500 cursor-pointer dark:border-white dark:hover:shadow-white dark:hover:bg-[#7e7d7c] dark:text-[#fff8db]">
+      <img src="./images/web-icon.png" alt="Deployment" class="w-9" />
+      <h3 class="text-base font-semibold text-gray-700 my-3 dark:text-[#fff8db]">Website Deployment</h3>
+      <p class="text-gray-600 text-xs dark:text-[#fff8db]">Deploying and managing applications on platforms like Vercel and Netlify.</p>
+    </div>
+
+  </div>
+</section>
   <!-- My Work Section -->
     <section id="work" class="w-full px-[12%] py-8 scroll-mt-20">
       <h4 class="text-center mb-2 text-lg font-ovo">My portfolio</h4>
