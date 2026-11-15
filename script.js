@@ -1,7 +1,3 @@
-// ==========================================
-// Hiten Prasad — Portfolio Interactive Script
-// ==========================================
-
 // DOM Elements
 const sideMenu = document.querySelector("#sideMenu");
 const menuOverlay = document.querySelector("#menuOverlay");
@@ -56,11 +52,27 @@ window.addEventListener("scroll", () => {
   // Back to Top Button visibility
   if (backToTopBtn) {
     if (scrollY > 400) {
-      backToTopBtn.classList.remove("opacity-0", "pointer-events-none", "translate-y-4");
-      backToTopBtn.classList.add("opacity-100", "pointer-events-auto", "translate-y-0");
+      backToTopBtn.classList.remove(
+        "opacity-0",
+        "pointer-events-none",
+        "translate-y-4",
+      );
+      backToTopBtn.classList.add(
+        "opacity-100",
+        "pointer-events-auto",
+        "translate-y-0",
+      );
     } else {
-      backToTopBtn.classList.add("opacity-0", "pointer-events-none", "translate-y-4");
-      backToTopBtn.classList.remove("opacity-100", "pointer-events-auto", "translate-y-0");
+      backToTopBtn.classList.add(
+        "opacity-0",
+        "pointer-events-none",
+        "translate-y-4",
+      );
+      backToTopBtn.classList.remove(
+        "opacity-100",
+        "pointer-events-auto",
+        "translate-y-0",
+      );
     }
   }
 
@@ -74,7 +86,7 @@ window.addEventListener("scroll", () => {
         "shadow-sm",
         "border-b",
         "border-zinc-200/80",
-        "dark:border-white/[0.08]"
+        "dark:border-white/[0.08]",
       );
     } else {
       navBar.classList.remove(
@@ -84,7 +96,7 @@ window.addEventListener("scroll", () => {
         "shadow-sm",
         "border-b",
         "border-zinc-200/80",
-        "dark:border-white/[0.08]"
+        "dark:border-white/[0.08]",
       );
     }
   }
@@ -102,10 +114,18 @@ window.addEventListener("scroll", () => {
     const href = link.getAttribute("href");
     const isActive = href === `#${currentId}`;
     if (isActive) {
-      link.classList.add("text-violet-600", "dark:text-violet-400", "font-semibold");
+      link.classList.add(
+        "text-violet-600",
+        "dark:text-violet-400",
+        "font-semibold",
+      );
       link.classList.remove("text-zinc-600", "dark:text-zinc-400");
     } else {
-      link.classList.remove("text-violet-600", "dark:text-violet-400", "font-semibold");
+      link.classList.remove(
+        "text-violet-600",
+        "dark:text-violet-400",
+        "font-semibold",
+      );
       link.classList.add("text-zinc-600", "dark:text-zinc-400");
     }
   });
@@ -132,7 +152,10 @@ function initTheme() {
 function toggleTheme() {
   const isDark = document.documentElement.classList.toggle("dark");
   localStorage.theme = isDark ? "dark" : "light";
-  showToast(isDark ? "Switched to Dark Mode" : "Switched to Light Mode", "info");
+  showToast(
+    isDark ? "Switched to Dark Mode" : "Switched to Light Mode",
+    "info",
+  );
 }
 
 initTheme();
@@ -224,7 +247,7 @@ function initProjectFilters() {
           "bg-violet-600",
           "text-white",
           "shadow-md",
-          "shadow-violet-500/25"
+          "shadow-violet-500/25",
         );
         b.classList.add(
           "bg-zinc-100",
@@ -232,7 +255,7 @@ function initProjectFilters() {
           "hover:bg-zinc-200",
           "dark:bg-white/[0.05]",
           "dark:text-zinc-400",
-          "dark:hover:bg-white/[0.1]"
+          "dark:hover:bg-white/[0.1]",
         );
       });
 
@@ -240,7 +263,7 @@ function initProjectFilters() {
         "bg-violet-600",
         "text-white",
         "shadow-md",
-        "shadow-violet-500/25"
+        "shadow-violet-500/25",
       );
       btn.classList.remove(
         "bg-zinc-100",
@@ -248,7 +271,7 @@ function initProjectFilters() {
         "hover:bg-zinc-200",
         "dark:bg-white/[0.05]",
         "dark:text-zinc-400",
-        "dark:hover:bg-white/[0.1]"
+        "dark:hover:bg-white/[0.1]",
       );
 
       // Filter project cards
@@ -366,7 +389,8 @@ if (form) {
     if (hcaptchaVal && !hcaptchaVal.value) {
       if (result) {
         result.textContent = "Please complete the captcha verification.";
-        result.className = "text-center text-sm mb-4 text-amber-500 font-medium";
+        result.className =
+          "text-center text-sm mb-4 text-amber-500 font-medium";
       }
       showToast("Please complete the captcha verification", "error");
       return;
@@ -383,7 +407,8 @@ if (form) {
     if (result) {
       result.style.display = "block";
       result.textContent = "Sending your message...";
-      result.className = "text-center text-sm mb-4 text-zinc-500 dark:text-zinc-400";
+      result.className =
+        "text-center text-sm mb-4 text-zinc-500 dark:text-zinc-400";
     }
 
     fetch("https://api.web3forms.com/submit", {
@@ -398,14 +423,16 @@ if (form) {
         const jsonResponse = await response.json();
         if (response.status === 200) {
           if (result) {
-            result.textContent = "Message sent successfully! I'll get back to you shortly.";
+            result.textContent =
+              "Message sent successfully! I'll get back to you shortly.";
             result.className =
               "text-center text-sm mb-4 text-emerald-600 dark:text-emerald-400 font-medium";
           }
           showToast("Message sent successfully!", "success");
           form.reset();
         } else {
-          const errMessage = jsonResponse.message || "Failed to send message. Please try again.";
+          const errMessage =
+            jsonResponse.message || "Failed to send message. Please try again.";
           if (result) {
             result.textContent = errMessage;
             result.className = "text-center text-sm mb-4 text-rose-500";
@@ -414,7 +441,8 @@ if (form) {
         }
       })
       .catch(() => {
-        const errMsg = "Something went wrong. Please reach out via email directly.";
+        const errMsg =
+          "Something went wrong. Please reach out via email directly.";
         if (result) {
           result.textContent = errMsg;
           result.className = "text-center text-sm mb-4 text-rose-500";
