@@ -10,9 +10,7 @@ const typingTextElement = document.querySelector("#typingText");
 
 // ---------- Mobile Navigation Menu ----------
 function openMenu() {
-  if (sideMenu) {
-    sideMenu.style.transform = "translateX(0)";
-  }
+  if (sideMenu) sideMenu.style.transform = "translateX(0)";
   if (menuOverlay) {
     menuOverlay.classList.remove("opacity-0", "pointer-events-none");
     menuOverlay.classList.add("opacity-100", "pointer-events-auto");
@@ -21,9 +19,7 @@ function openMenu() {
 }
 
 function closeMenu() {
-  if (sideMenu) {
-    sideMenu.style.transform = "translateX(100%)";
-  }
+  if (sideMenu) sideMenu.style.transform = "translateX(100%)";
   if (menuOverlay) {
     menuOverlay.classList.remove("opacity-100", "pointer-events-auto");
     menuOverlay.classList.add("opacity-0", "pointer-events-none");
@@ -31,127 +27,97 @@ function closeMenu() {
   document.body.style.overflow = "";
 }
 
-// Close mobile menu on Escape key
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    closeMenu();
-  }
+  if (e.key === "Escape") closeMenu();
+});
+
+// Close drawer if window is resized to desktop width
+window.addEventListener("resize", () => {
+  if (window.innerWidth >= 768) closeMenu();
 });
 
 // ---------- Scroll Progress & Navigation Handler ----------
-window.addEventListener("scroll", () => {
+const navScrolledClasses = [
+  "bg-white/80",
+  "dark:bg-[#09090b]/80",
+  "backdrop-blur-xl",
+  "shadow-sm",
+  "border-b",
+  "border-zinc-200/80",
+  "dark:border-white/[0.08]",
+];
+const activeLinkClasses = [
+  "text-violet-600",
+  "dark:text-violet-400",
+  "font-semibold",
+];
+
+function handleScroll() {
   const scrollY = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   const scrollPercent = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
 
-  // Scroll Progress Bar
-  if (scrollProgressBar) {
-    scrollProgressBar.style.width = `${scrollPercent}%`;
-  }
+  if (scrollProgressBar) scrollProgressBar.style.width = `${scrollPercent}%`;
 
-  // Back to Top Button visibility
   if (backToTopBtn) {
-    if (scrollY > 400) {
-      backToTopBtn.classList.remove(
-        "opacity-0",
-        "pointer-events-none",
-        "translate-y-4",
-      );
-      backToTopBtn.classList.add(
-        "opacity-100",
-        "pointer-events-auto",
-        "translate-y-0",
-      );
-    } else {
-      backToTopBtn.classList.add(
-        "opacity-0",
-        "pointer-events-none",
-        "translate-y-4",
-      );
-      backToTopBtn.classList.remove(
-        "opacity-100",
-        "pointer-events-auto",
-        "translate-y-0",
-      );
-    }
+    const show = scrollY > 400;
+    backToTopBtn.classList.toggle("opacity-0", !show);
+    backToTopBtn.classList.toggle("pointer-events-none", !show);
+    backToTopBtn.classList.toggle("translate-y-4", !show);
+    backToTopBtn.classList.toggle("opacity-100", show);
+    backToTopBtn.classList.toggle("pointer-events-auto", show);
+    backToTopBtn.classList.toggle("translate-y-0", show);
   }
 
-  // Navbar glassmorphism & background refinement
   if (navBar) {
-    if (scrollY > 40) {
-      navBar.classList.add(
-        "bg-white/80",
-        "dark:bg-[#09090b]/80",
-        "backdrop-blur-xl",
-        "shadow-sm",
-        "border-b",
-        "border-zinc-200/80",
-        "dark:border-white/[0.08]",
-      );
-    } else {
-      navBar.classList.remove(
-        "bg-white/80",
-        "dark:bg-[#09090b]/80",
-        "backdrop-blur-xl",
-        "shadow-sm",
-        "border-b",
-        "border-zinc-200/80",
-        "dark:border-white/[0.08]",
-      );
-    }
+    const scrolled = scrollY > 40;
+    navScrolledClasses.forEach((c) => navBar.classList.toggle(c, scrolled));
   }
 
-  // Active Navigation Link Highlight (ScrollSpy)
+  // ScrollSpy
   let currentId = "";
   sections.forEach((section) => {
-    const sectionTop = section.offsetTop - 180;
-    if (scrollY >= sectionTop) {
+    if (scrollY >= section.offsetTop - 180) {
       currentId = section.getAttribute("id");
     }
   });
+  // Last section (contact) may never reach its offset on tall screens
+  if (
+    window.innerHeight + scrollY >=
+    document.documentElement.scrollHeight - 4
+  ) {
+    currentId = "contact";
+  }
 
   navAnchors.forEach((link) => {
-    const href = link.getAttribute("href");
-    const isActive = href === `#${currentId}`;
-    if (isActive) {
-      link.classList.add(
-        "text-violet-600",
-        "dark:text-violet-400",
-        "font-semibold",
-      );
-      link.classList.remove("text-zinc-600", "dark:text-zinc-400");
-    } else {
-      link.classList.remove(
-        "text-violet-600",
-        "dark:text-violet-400",
-        "font-semibold",
-      );
-      link.classList.add("text-zinc-600", "dark:text-zinc-400");
-    }
+    const isActive = link.getAttribute("href") === `#${currentId}`;
+    activeLinkClasses.forEach((c) => link.classList.toggle(c, isActive));
   });
-});
+}
 
-// Smooth Scroll to Top
+window.addEventListener("scroll", handleScroll, { passive: true });
+
 function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // ---------- Dark / Light Mode ----------
 function initTheme() {
+  let stored = null;
+  try {
+    stored = localStorage.getItem("theme");
+  } catch (e) {}
   const isDark =
-    localStorage.theme === "dark" ||
-    (!("theme" in localStorage) &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches);
-
+    stored === "dark" ||
+    (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches);
   document.documentElement.classList.toggle("dark", isDark);
 }
 
 function toggleTheme() {
   const isDark = document.documentElement.classList.toggle("dark");
-  localStorage.theme = isDark ? "dark" : "light";
+  try {
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  } catch (e) {}
   showToast(
     isDark ? "Switched to Dark Mode" : "Switched to Light Mode",
     "info",
@@ -160,19 +126,20 @@ function toggleTheme() {
 
 initTheme();
 
-// Listen for system theme changes if user hasn't explicitly set preference
 window
   .matchMedia("(prefers-color-scheme: dark)")
   .addEventListener("change", (e) => {
-    if (!("theme" in localStorage)) {
-      document.documentElement.classList.toggle("dark", e.matches);
-    }
+    let stored = null;
+    try {
+      stored = localStorage.getItem("theme");
+    } catch (err) {}
+    if (!stored) document.documentElement.classList.toggle("dark", e.matches);
   });
 
 // ---------- Dynamic Typing / Rotating Tagline ----------
 const phrases = [
-  "MERN Stack Specialist",
-  "Frontend & UI/UX Engineer",
+  "MERN Stack Developer",
+  "Clean UI/UX Design",
   "RESTful API Architect",
   "Open Source Enthusiast",
   "Scalable Web Solutions",
@@ -200,32 +167,23 @@ function typeEffect() {
 
   if (!isDeleting && charIndex === currentPhrase.length) {
     isDeleting = true;
-    typingSpeed = 2000; // Pause at full word
+    typingSpeed = 2000;
   } else if (isDeleting && charIndex === 0) {
     isDeleting = false;
     phraseIndex = (phraseIndex + 1) % phrases.length;
-    typingSpeed = 400; // Pause before typing new word
+    typingSpeed = 400;
   }
 
   setTimeout(typeEffect, typingSpeed);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  typeEffect();
-  initSpotlightCards();
-  initProjectFilters();
-});
-
 // ---------- Spotlight Hover Effect on Cards ----------
 function initSpotlightCards() {
-  const cards = document.querySelectorAll(".spotlight-card");
-  cards.forEach((card) => {
+  document.querySelectorAll(".spotlight-card").forEach((card) => {
     card.addEventListener("mousemove", (e) => {
       const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      card.style.setProperty("--mouse-x", `${x}px`);
-      card.style.setProperty("--mouse-y", `${y}px`);
+      card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+      card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
     });
   });
 }
@@ -237,56 +195,49 @@ function initProjectFilters() {
 
   if (!filterBtns.length || !projectCards.length) return;
 
+  const activeCls = [
+    "bg-violet-600",
+    "text-white",
+    "shadow-md",
+    "shadow-violet-500/25",
+  ];
+  const inactiveCls = [
+    "bg-zinc-100",
+    "text-zinc-600",
+    "hover:bg-zinc-200",
+    "dark:bg-white/[0.05]",
+    "dark:text-zinc-400",
+    "dark:hover:bg-white/[0.1]",
+  ];
+
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       const category = btn.getAttribute("data-filter");
 
-      // Update active button styling
       filterBtns.forEach((b) => {
-        b.classList.remove(
-          "bg-violet-600",
-          "text-white",
-          "shadow-md",
-          "shadow-violet-500/25",
-        );
-        b.classList.add(
-          "bg-zinc-100",
-          "text-zinc-600",
-          "hover:bg-zinc-200",
-          "dark:bg-white/[0.05]",
-          "dark:text-zinc-400",
-          "dark:hover:bg-white/[0.1]",
-        );
+        b.classList.remove(...activeCls);
+        b.classList.add(...inactiveCls);
       });
+      btn.classList.remove(...inactiveCls);
+      btn.classList.add(...activeCls);
 
-      btn.classList.add(
-        "bg-violet-600",
-        "text-white",
-        "shadow-md",
-        "shadow-violet-500/25",
-      );
-      btn.classList.remove(
-        "bg-zinc-100",
-        "text-zinc-600",
-        "hover:bg-zinc-200",
-        "dark:bg-white/[0.05]",
-        "dark:text-zinc-400",
-        "dark:hover:bg-white/[0.1]",
-      );
-
-      // Filter project cards
       projectCards.forEach((card) => {
-        const cardCategory = card.getAttribute("data-category");
-        if (category === "all" || cardCategory.includes(category)) {
-          card.style.display = "block";
-          setTimeout(() => {
+        const cats = (card.getAttribute("data-category") || "").split(" ");
+        const match = category === "all" || cats.includes(category);
+
+        clearTimeout(card._filterTimer);
+
+        if (match) {
+          // Cards are flex-col, so restore "flex" (NOT "block")
+          card.style.display = "flex";
+          card._filterTimer = setTimeout(() => {
             card.style.opacity = "1";
             card.style.transform = "scale(1)";
           }, 50);
         } else {
           card.style.opacity = "0";
           card.style.transform = "scale(0.96)";
-          setTimeout(() => {
+          card._filterTimer = setTimeout(() => {
             card.style.display = "none";
           }, 250);
         }
@@ -301,8 +252,9 @@ function showToast(message, type = "success") {
   if (!toastContainer) {
     toastContainer = document.createElement("div");
     toastContainer.id = "toastContainer";
+    // bottom-24 so toasts don't sit on top of the Back-to-Top button
     toastContainer.className =
-      "fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none";
+      "fixed bottom-24 right-6 z-[110] flex flex-col gap-2 pointer-events-none";
     document.body.appendChild(toastContainer);
   }
 
@@ -319,22 +271,22 @@ function showToast(message, type = "success") {
     iconSvg = `<svg class="w-5 h-5 text-violet-400 dark:text-violet-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
   }
 
-  toast.innerHTML = `${iconSvg}<span>${message}</span>`;
+  // Use textContent for the message (avoids HTML injection from server messages)
+  toast.innerHTML = iconSvg;
+  const span = document.createElement("span");
+  span.textContent = message;
+  toast.appendChild(span);
   toastContainer.appendChild(toast);
 
-  // Trigger animation
   requestAnimationFrame(() => {
     toast.classList.remove("translate-y-4", "opacity-0");
     toast.classList.add("translate-y-0", "opacity-100");
   });
 
-  // Remove toast after delay
   setTimeout(() => {
     toast.classList.remove("translate-y-0", "opacity-100");
     toast.classList.add("translate-y-4", "opacity-0");
-    setTimeout(() => {
-      toast.remove();
-    }, 300);
+    setTimeout(() => toast.remove(), 300);
   }, 3200);
 }
 
@@ -343,12 +295,8 @@ function copyToClipboard(text, customMessage = "Copied to clipboard!") {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard
       .writeText(text)
-      .then(() => {
-        showToast(customMessage, "success");
-      })
-      .catch(() => {
-        fallbackCopyTextToClipboard(text, customMessage);
-      });
+      .then(() => showToast(customMessage, "success"))
+      .catch(() => fallbackCopyTextToClipboard(text, customMessage));
   } else {
     fallbackCopyTextToClipboard(text, customMessage);
   }
@@ -373,86 +321,78 @@ function fallbackCopyTextToClipboard(text, customMessage) {
   document.body.removeChild(textArea);
 }
 
-// ---------- Contact Form (Web3Forms) ----------
-const form = document.getElementById("form");
-const result = document.getElementById("formResult");
-const submitBtn = document.getElementById("contactSubmit");
-const buttonText = document.getElementById("buttonText");
-const buttonSpinner = document.getElementById("buttonSpinner");
+// ---------- Contact Form (Web3Forms, no captcha) ----------
+function initContactForm() {
+  const form = document.getElementById("form");
+  const result = document.getElementById("formResult");
+  const submitBtn = document.getElementById("contactSubmit");
+  const buttonText = document.getElementById("buttonText");
+  const buttonSpinner = document.getElementById("buttonSpinner");
 
-if (form) {
-  form.addEventListener("submit", function (e) {
+  if (!form) return;
+
+  const setResult = (text, cls) => {
+    if (!result) return;
+    result.textContent = text;
+    result.className = `text-center text-sm font-medium ${cls}`;
+  };
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Check hCaptcha response if present
-    const hcaptchaVal = form.querySelector('[name="h-captcha-response"]');
-    if (hcaptchaVal && !hcaptchaVal.value) {
-      if (result) {
-        result.textContent = "Please complete the captcha verification.";
-        result.className =
-          "text-center text-sm mb-4 text-amber-500 font-medium";
-      }
-      showToast("Please complete the captcha verification", "error");
-      return;
-    }
-
-    const formData = new FormData(form);
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
+    const json = JSON.stringify(Object.fromEntries(new FormData(form)));
 
     if (submitBtn) submitBtn.disabled = true;
     if (buttonText) buttonText.textContent = "Sending...";
     if (buttonSpinner) buttonSpinner.classList.remove("hidden");
+    setResult("Sending your message...", "text-zinc-500 dark:text-zinc-400");
 
-    if (result) {
-      result.style.display = "block";
-      result.textContent = "Sending your message...";
-      result.className =
-        "text-center text-sm mb-4 text-zinc-500 dark:text-zinc-400";
-    }
-
-    fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: json,
-    })
-      .then(async (response) => {
-        const jsonResponse = await response.json();
-        if (response.status === 200) {
-          if (result) {
-            result.textContent =
-              "Message sent successfully! I'll get back to you shortly.";
-            result.className =
-              "text-center text-sm mb-4 text-emerald-600 dark:text-emerald-400 font-medium";
-          }
-          showToast("Message sent successfully!", "success");
-          form.reset();
-        } else {
-          const errMessage =
-            jsonResponse.message || "Failed to send message. Please try again.";
-          if (result) {
-            result.textContent = errMessage;
-            result.className = "text-center text-sm mb-4 text-rose-500";
-          }
-          showToast(errMessage, "error");
-        }
-      })
-      .catch(() => {
-        const errMsg =
-          "Something went wrong. Please reach out via email directly.";
-        if (result) {
-          result.textContent = errMsg;
-          result.className = "text-center text-sm mb-4 text-rose-500";
-        }
-        showToast(errMsg, "error");
-      })
-      .finally(() => {
-        if (submitBtn) submitBtn.disabled = false;
-        if (buttonText) buttonText.textContent = "Send Message";
-        if (buttonSpinner) buttonSpinner.classList.add("hidden");
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
       });
+      const data = await response.json();
+
+      if (response.status === 200 && data.success !== false) {
+        setResult(
+          "Message sent successfully! I'll get back to you shortly.",
+          "text-emerald-600 dark:text-emerald-400",
+        );
+        showToast("Message sent successfully!", "success");
+        form.reset();
+      } else {
+        const msg = data.message || "Failed to send message. Please try again.";
+        setResult(msg, "text-rose-500");
+        showToast(msg, "error");
+      }
+    } catch (err) {
+      const msg = "Something went wrong. Please reach out via email directly.";
+      setResult(msg, "text-rose-500");
+      showToast(msg, "error");
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+      if (buttonText) buttonText.textContent = "Send Message";
+      if (buttonSpinner) buttonSpinner.classList.add("hidden");
+    }
   });
+}
+
+// ---------- Init ----------
+function initializePortfolio() {
+  typeEffect();
+  initSpotlightCards();
+  initProjectFilters();
+  initContactForm();
+  handleScroll(); // set initial nav / progress state
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initializePortfolio);
+} else {
+  initializePortfolio();
 }
