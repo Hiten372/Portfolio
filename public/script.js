@@ -138,8 +138,8 @@ window
 
 // ---------- Dynamic Typing / Rotating Tagline ----------
 const phrases = [
-  "MERN Stack Developer",
-  "Clean UI/UX Design",
+  "MERN Stack Specialist",
+  "Frontend & UI/UX Engineer",
   "RESTful API Architect",
   "Open Source Enthusiast",
   "Scalable Web Solutions",
@@ -321,7 +321,8 @@ function fallbackCopyTextToClipboard(text, customMessage) {
   document.body.removeChild(textArea);
 }
 
-// ---------- Contact Form (Web3Forms, no captcha) ----------
+// ---------- Contact Form (SMTP via /api/contact) ----------
+const CONTACT_API_URL = "/api/contact";
 function initContactForm() {
   const form = document.getElementById("form");
   const result = document.getElementById("formResult");
@@ -348,7 +349,7 @@ function initContactForm() {
     setResult("Sending your message...", "text-zinc-500 dark:text-zinc-400");
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch(CONTACT_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -356,7 +357,10 @@ function initContactForm() {
         },
         body: json,
       });
-      const data = await response.json();
+      let data = {};
+      try {
+        data = await response.json();
+      } catch (e) {}
 
       if (response.status === 200 && data.success !== false) {
         setResult(
